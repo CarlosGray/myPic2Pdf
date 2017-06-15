@@ -1,0 +1,8 @@
+D:\MyProject\myPic2Pdf\myPic2Pdf\bin\Debug\myPic2Pdf.exe
+D:\MyProject\myPic2Pdf\myPic2Pdf\bin\Debug\myPic2Pdf.pdb
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\x86\Debug\myPic2Pdf.Properties.Resources.resources
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\x86\Debug\myPic2Pdf.csproj.GenerateResource.Cache
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\x86\Debug\myPic2Pdf.exe
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\x86\Debug\myPic2Pdf.pdb
+D:\MyProject\myPic2Pdf\myPic2Pdf\bin\Debug\PdfSharp.dll
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\x86\Debug\myPic2Pdf.Form1.resources
