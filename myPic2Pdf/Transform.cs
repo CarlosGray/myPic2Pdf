@@ -167,6 +167,7 @@ namespace Transform
             }
             else
                 gfx.DrawImage(image, x, y);
+            image.Dispose();
         }
         /// 作为遍历文件函数的子函数
         /// </summary>
@@ -184,51 +185,5 @@ namespace Transform
             }
             return _fileList;
         }
-        static public string GetFileName(string parentDir)
-        {
-            DirectoryInfo TheFolder = new DirectoryInfo(parentDir);
-            FileInfo[] file = TheFolder.GetFiles("*.txt");
-            if (file.Length == 0)
-            {
-                return parentDir.Remove(parentDir.LastIndexOf('\\') + 1) + TheFolder.Name + ".pdf";
-            }
-            else
-            {
-                return parentDir.Remove(parentDir.LastIndexOf('\\') + 1) + file[0].Name.Replace(".txt", "") + ".pdf";
-            }
-        }
     }
-
-
-    /// <summary>
-    /// This sample is the obligatory Hello World program.
-    /// </summary>
-    //class Program
-    //{
-    //    static void Main()
-    //    {
-    //        #region image Sample
-    //        PdfDocument document = new PdfDocument();
-    //        string folder = @"E:\FileRecv]\PM\JPG格式转PDF(1)\c42-15-20-295";
-    //        string filename = Transform.PDFSharpImages.GetFileName(folder);
-    //        List<string> files = Transform.PDFSharpImages.GetAllFiles(folder);
-
-    //        foreach (string path in files)
-    //        {
-    //            //// Create an empty page
-    //            //Image image = Image.FromFile(path);
-    //            PDFSharpImages PDFImage = new PDFSharpImages(document);
-    //            //PDFImage.DrawImage(document, image,10, 10);
-    //            PdfPage page = document.AddPage();
-    //            page.Size = PdfSharp.PageSize.A4;
-
-    //            //    ////// Get an XGraphics object for drawing
-    //            XGraphics gfx = XGraphics.FromPdfPage(page);
-    //            PDFImage.DrawImage(gfx, path, true);
-    //            //PDFImage.DrawImage(gfx, path);
-    //        }
-    //        document.Save(filename);
-
-    //    }
-    //}
 }

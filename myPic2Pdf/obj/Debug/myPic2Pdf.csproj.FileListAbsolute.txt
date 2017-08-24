@@ -1,1 +1,13 @@
 D:\MyProject\myPic2Pdf\myPic2Pdf\bin\Debug\myPic2Pdf.exe.config
+D:\MyProject\myPic2Pdf\myPic2Pdf\bin\Debug\myPic2Pdf.exe.manifest
+D:\MyProject\myPic2Pdf\myPic2Pdf\bin\Debug\myPic2Pdf.application
+D:\MyProject\myPic2Pdf\myPic2Pdf\bin\Debug\myPic2Pdf.exe
+D:\MyProject\myPic2Pdf\myPic2Pdf\bin\Debug\myPic2Pdf.pdb
+D:\MyProject\myPic2Pdf\myPic2Pdf\bin\Debug\PdfSharp.dll
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\Debug\myPic2Pdf.Form1.resources
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\Debug\myPic2Pdf.Properties.Resources.resources
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\Debug\myPic2Pdf.csproj.GenerateResource.Cache
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\Debug\myPic2Pdf.exe.manifest
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\Debug\myPic2Pdf.application
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\Debug\myPic2Pdf.exe
+D:\MyProject\myPic2Pdf\myPic2Pdf\obj\Debug\myPic2Pdf.pdb

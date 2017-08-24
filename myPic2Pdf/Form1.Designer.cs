@@ -92,7 +92,6 @@
             this.CB_size.Name = "CB_size";
             this.CB_size.Size = new System.Drawing.Size(54, 20);
             this.CB_size.TabIndex = 2;
-            this.CB_size.Text = "A4";
             // 
             // label1
             // 
@@ -174,6 +173,8 @@
             this.CB_size.Items.Add(new ComboBoxItem<string, PdfSharp.PageSize>("B3", PdfSharp.PageSize.B3));
             this.CB_size.Items.Add(new ComboBoxItem<string, PdfSharp.PageSize>("B4", PdfSharp.PageSize.B4));
             this.CB_size.Items.Add(new ComboBoxItem<string, PdfSharp.PageSize>("B5", PdfSharp.PageSize.B5));
+
+            this.CB_size.Text = "A4";
         }
 
         private System.Windows.Forms.ListBox listBox1;
@@ -184,8 +185,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
 
-        private PdfSharp.PageSize mSize;
-        private bool mIsAutoZoom;
+        
     }
 }
 

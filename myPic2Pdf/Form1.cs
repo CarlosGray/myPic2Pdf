@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -64,7 +65,7 @@ namespace myPic2Pdf
             {
                 PdfDocument document = new PdfDocument();
                 string folder = var.ToString();
-                string filename = Transform.PDFSharpImages.GetFileName(folder);
+                string filename = folder + ".pdf";
                 List<string> files = Transform.PDFSharpImages.GetAllFiles(folder);
 
                 foreach (string path in files)
@@ -76,13 +77,17 @@ namespace myPic2Pdf
                     page.Size = mSize;
                     XGraphics gfx = XGraphics.FromPdfPage(page);
                     PDFImage.DrawImage(gfx, path, mIsAutoZoom);
-
                     SetTextMessage(prePos + rate * (files.IndexOf(path) + 1) / files.Count, info);
                 }
                 document.Save(filename);
                 prePos = prePos + rate;
+                document.Close();
+
+                Directory.Delete(folder, true);
             }
+            
             SetTextMessage(100, "转换完成");
+
         }
         private delegate void SetPos(int ipos, string info);
         private void SetTextMessage(int ipos, string info)
@@ -102,8 +107,12 @@ namespace myPic2Pdf
                     this.button1.Enabled = true;
                     this.checkBox1.Enabled = true;
                     this.CB_size.Enabled = true;
+                    //this.listBox1.Items.Clear();
                 }
             }
         }
+
+        private PdfSharp.PageSize mSize;
+        private bool mIsAutoZoom;
     }
 }
