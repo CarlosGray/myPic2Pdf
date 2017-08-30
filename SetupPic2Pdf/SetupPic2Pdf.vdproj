@@ -267,7 +267,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pic2Pdf"
         "ProductCode" = "8:{F3CA747B-12C7-43B3-9A65-5F520F9DA0D5}"
-        "PackageCode" = "8:{B6BDEA88-917B-499D-8C92-07335A41EA13}"
+        "PackageCode" = "8:{2E9F212E-52D0-43EB-9EA2-6ECCD874A6B0}"
         "UpgradeCode" = "8:{847A85B3-5419-493B-AA02-632E2D493324}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

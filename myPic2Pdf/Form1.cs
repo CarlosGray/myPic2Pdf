@@ -64,6 +64,8 @@ namespace myPic2Pdf
             foreach (object var in this.listBox1.Items)
             {
                 string folder = var.ToString();
+                if (File.Exists(folder))
+                    continue;
                 if (isFolderEmp(folder))
                 {
                     Directory.Delete(folder, true);
@@ -89,7 +91,7 @@ namespace myPic2Pdf
                             document.AddPage(inputPage);
                         }
                     }
-                    else
+                    else if (isImg(path))
                     {
                         PDFSharpImages PDFImage = new PDFSharpImages(document);
                         PdfPage page = document.AddPage();
@@ -150,6 +152,17 @@ namespace myPic2Pdf
             string exname = filename.Substring(filename.LastIndexOf(".") + 1);
 
             if (exname.Equals("pdf"))
+            {
+                return true;
+            }
+
+            return false;
+        }
+        private bool isImg(string filename)
+        {
+            string exname = filename.Substring(filename.LastIndexOf(".") + 1);
+
+            if (exname.Equals("jpg") || exname.Equals("bmp"))
             {
                 return true;
             }
