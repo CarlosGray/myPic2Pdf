@@ -72,7 +72,7 @@ namespace myPic2Pdf
                     continue;
                 }
                 string filename = folder + ".pdf";
-                List<string> files = Transform.PDFSharpImages.GetAllFiles(folder);
+                List<string> files = GetAllFiles(folder);
                 PdfDocument document = new PdfDocument();
 
                 foreach (string path in files)
@@ -147,6 +147,17 @@ namespace myPic2Pdf
             }
             return true;
         }
+        static public List<string> GetAllFiles(string parentDir)
+        {
+            List<string> _fileList = new List<string>();
+            DirectoryInfo TheFolder = new DirectoryInfo(parentDir);
+            foreach (FileInfo fi in TheFolder.GetFiles())
+            {
+                _fileList.Add(fi.FullName);
+            }
+            return _fileList;
+        }
+
         private bool isPdf(string filename)
         {
             string exname = filename.Substring(filename.LastIndexOf(".") + 1);

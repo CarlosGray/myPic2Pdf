@@ -169,21 +169,5 @@ namespace Transform
                 gfx.DrawImage(image, x, y);
             image.Dispose();
         }
-        /// 作为遍历文件函数的子函数
-        /// </summary>
-        /// <param name="parentDir">目录名称</param>
-        /// <param name="result">该目录下的所有文件</param>
-        static public List<string> GetAllFiles(string parentDir)
-        {
-            List<string> _fileList = new List<string>();
-            DirectoryInfo TheFolder = new DirectoryInfo(parentDir);
-            foreach (FileInfo fi in TheFolder.GetFiles())//遍历文件夹下所有文件
-            {
-                if (fi.Extension.Equals(".txt"))
-                    continue;
-                _fileList.Add(fi.FullName);
-            }
-            return _fileList;
-        }
     }
 }
