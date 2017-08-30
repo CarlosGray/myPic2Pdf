@@ -63,20 +63,40 @@ namespace myPic2Pdf
             int prePos = 0;
             foreach (object var in this.listBox1.Items)
             {
-                PdfDocument document = new PdfDocument();
                 string folder = var.ToString();
+                if (isFolderEmp(folder))
+                {
+                    Directory.Delete(folder, true);
+                    continue;
+                }
                 string filename = folder + ".pdf";
                 List<string> files = Transform.PDFSharpImages.GetAllFiles(folder);
+                PdfDocument document = new PdfDocument();
 
                 foreach (string path in files)
                 {
                     string info = "正在转换：" + path;
-
-                    PDFSharpImages PDFImage = new PDFSharpImages(document);
-                    PdfPage page = document.AddPage();
-                    page.Size = mSize;
-                    XGraphics gfx = XGraphics.FromPdfPage(page);
-                    PDFImage.DrawImage(gfx, path, mIsAutoZoom);
+                    if (isPdf(path))
+                    {
+                        // Open the document to import pages from it.
+                        PdfDocument inputDocument = PdfReader.Open(path, PdfDocumentOpenMode.Import);
+                        int count = inputDocument.PageCount;
+                        for (int idx = 0; idx < count; idx++)
+                        {
+                            // Get the page from the external document...
+                            PdfPage inputPage = inputDocument.Pages[idx];
+                            // ...and add it to the output document.
+                            document.AddPage(inputPage);
+                        }
+                    }
+                    else
+                    {
+                        PDFSharpImages PDFImage = new PDFSharpImages(document);
+                        PdfPage page = document.AddPage();
+                        page.Size = mSize;
+                        XGraphics gfx = XGraphics.FromPdfPage(page);
+                        PDFImage.DrawImage(gfx, path, mIsAutoZoom);
+                    }
                     SetTextMessage(prePos + rate * (files.IndexOf(path) + 1) / files.Count, info);
                 }
                 document.Save(filename);
@@ -111,7 +131,31 @@ namespace myPic2Pdf
                 }
             }
         }
+        private bool isFolderEmp(string folder)
+        {
+            string[] files = Directory.GetFiles(folder);
+            foreach (string file in files)
+            {
+                string exname = file.Substring(file.LastIndexOf(".") + 1);
 
+                if (exname.Equals("jpg") || exname.Equals("bmp") || exname.Equals("pdf"))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private bool isPdf(string filename)
+        {
+            string exname = filename.Substring(filename.LastIndexOf(".") + 1);
+
+            if (exname.Equals("pdf"))
+            {
+                return true;
+            }
+
+            return false;
+        }
         private PdfSharp.PageSize mSize;
         private bool mIsAutoZoom;
     }

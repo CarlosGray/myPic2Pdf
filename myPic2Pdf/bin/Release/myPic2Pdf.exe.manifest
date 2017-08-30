@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="myPic2Pdf.exe" size="17408">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="myPic2Pdf.exe" size="17920">
       <assemblyIdentity name="myPic2Pdf" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>sN7nxSdcV/34hqw3U92nDCkHCFY=</dsig:DigestValue>
+        <dsig:DigestValue>2K9061F6a33VGZg9e5PnA16H29Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
