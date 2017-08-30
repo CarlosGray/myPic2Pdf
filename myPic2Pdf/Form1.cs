@@ -59,13 +59,14 @@ namespace myPic2Pdf
         }
         private void runFunc()
         {
+            int parRate = 100 / listBox1.Items.Count;
             int rate = 0;
             int prePos = 0;
             foreach (object var in this.listBox1.Items)
             {
                 string parentFolder = var.ToString();
                 string[] directions = GetDirectories(parentFolder,"*.*", true);
-                rate = 100 / directions.Length;
+                rate = parRate / directions.Length;
                 int i = 1;
                 foreach (string folder in directions)
                 {
