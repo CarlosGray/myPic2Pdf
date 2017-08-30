@@ -59,53 +59,30 @@ namespace myPic2Pdf
         }
         private void runFunc()
         {
-            int rate = 100 / this.listBox1.Items.Count;
+            int rate = 0;
             int prePos = 0;
             foreach (object var in this.listBox1.Items)
             {
-                string folder = var.ToString();
-                if (File.Exists(folder))
-                    continue;
-                if (isFolderEmp(folder))
+                string parentFolder = var.ToString();
+                string[] directions = GetDirectories(parentFolder,"*.*", true);
+                rate = 100 / directions.Length;
+                int i = 1;
+                foreach (string folder in directions)
                 {
-                    Directory.Delete(folder, true);
-                    continue;
-                }
-                string filename = folder + ".pdf";
-                List<string> files = GetAllFiles(folder);
-                PdfDocument document = new PdfDocument();
-
-                foreach (string path in files)
-                {
-                    string info = "正在转换：" + path;
-                    if (isPdf(path))
+                    if (isParentFolder(folder))
+                        continue;
+                    if (File.Exists(folder))
+                        continue;
+                    if (isFolderEmp(folder))
                     {
-                        // Open the document to import pages from it.
-                        PdfDocument inputDocument = PdfReader.Open(path, PdfDocumentOpenMode.Import);
-                        int count = inputDocument.PageCount;
-                        for (int idx = 0; idx < count; idx++)
-                        {
-                            // Get the page from the external document...
-                            PdfPage inputPage = inputDocument.Pages[idx];
-                            // ...and add it to the output document.
-                            document.AddPage(inputPage);
-                        }
+                        Directory.Delete(folder, true);
+                        continue;
                     }
-                    else if (isImg(path))
-                    {
-                        PDFSharpImages PDFImage = new PDFSharpImages(document);
-                        PdfPage page = document.AddPage();
-                        page.Size = mSize;
-                        XGraphics gfx = XGraphics.FromPdfPage(page);
-                        PDFImage.DrawImage(gfx, path, mIsAutoZoom);
-                    }
-                    SetTextMessage(prePos + rate * (files.IndexOf(path) + 1) / files.Count, info);
+                    string info = "正在转换：" + folder + ".pdf";
+                    handleSubFolder(folder);
+                    SetTextMessage(prePos + rate * i / directions.Length, info);
+                    prePos = prePos + rate;
                 }
-                document.Save(filename);
-                prePos = prePos + rate;
-                document.Close();
-
-                Directory.Delete(folder, true);
             }
             
             SetTextMessage(100, "转换完成");
@@ -147,6 +124,12 @@ namespace myPic2Pdf
             }
             return true;
         }
+        private bool isParentFolder(string filename)
+        {
+            //判断是否存在文件夹  
+            string[] directoryNames = Directory.GetDirectories(filename);
+            return directoryNames.Length > 0;  
+        }
         static public List<string> GetAllFiles(string parentDir)
         {
             List<string> _fileList = new List<string>();
@@ -157,7 +140,42 @@ namespace myPic2Pdf
             }
             return _fileList;
         }
+        private void handleSubFolder(string folder)
+        {
+            
+            string filename = folder + ".pdf";
+            List<string> files = GetAllFiles(folder);
+            PdfDocument document = new PdfDocument();
 
+            foreach (string path in files)
+            {
+                if (isPdf(path))
+                {
+                    // Open the document to import pages from it.
+                    PdfDocument inputDocument = PdfReader.Open(path, PdfDocumentOpenMode.Import);
+                    int count = inputDocument.PageCount;
+                    for (int idx = 0; idx < count; idx++)
+                    {
+                        // Get the page from the external document...
+                        PdfPage inputPage = inputDocument.Pages[idx];
+                        // ...and add it to the output document.
+                        document.AddPage(inputPage);
+                    }
+                }
+                else if (isImg(path))
+                {
+                    PDFSharpImages PDFImage = new PDFSharpImages(document);
+                    PdfPage page = document.AddPage();
+                    page.Size = mSize;
+                    XGraphics gfx = XGraphics.FromPdfPage(page);
+                    PDFImage.DrawImage(gfx, path, mIsAutoZoom);
+                }
+            }
+            document.Save(filename);
+            document.Close();
+
+            Directory.Delete(folder, true);
+        }
         private bool isPdf(string filename)
         {
             string exname = filename.Substring(filename.LastIndexOf(".") + 1);
@@ -180,6 +198,29 @@ namespace myPic2Pdf
 
             return false;
         }
+        /// <summary>  
+        /// 获取指定目录及子目录中所有子目录列表  
+        /// </summary>  
+        /// <param name="directoryPath">指定目录的绝对路径</param>  
+        /// <param name="searchPattern">模式字符串，"*"代表0或N个字符，"?"代表1个字符。  
+        /// 范例："Log*.xml"表示搜索所有以Log开头的Xml文件。</param>  
+        /// <param name="isSearchChild">是否搜索子目录</param>  
+        public static string[] GetDirectories(string directoryPath, string searchPattern, bool isSearchChild)
+        {
+            try
+            {
+                return Directory.GetDirectories(
+                    directoryPath, 
+                    searchPattern, 
+                    isSearchChild ? 
+                    SearchOption.AllDirectories : 
+                    SearchOption.TopDirectoryOnly);
+            }
+            catch
+            {
+                throw null;
+            }
+        }  
         private PdfSharp.PageSize mSize;
         private bool mIsAutoZoom;
     }
