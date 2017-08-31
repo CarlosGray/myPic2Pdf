@@ -59,30 +59,45 @@ namespace myPic2Pdf
         }
         private void runFunc()
         {
-            int parRate = 100 / listBox1.Items.Count;
-            int rate = 0;
-            int prePos = 0;
+            double parRate = 100.0 / listBox1.Items.Count;
+            double rate = parRate;
+            double prePos = 0.0;
             foreach (object var in this.listBox1.Items)
             {
                 string parentFolder = var.ToString();
                 string[] directions = GetDirectories(parentFolder,"*.*", true);
-                rate = parRate / directions.Length;
-                int i = 1;
-                foreach (string folder in directions)
+
+                if (directions.Length == 0)
                 {
-                    if (isParentFolder(folder))
-                        continue;
-                    if (File.Exists(folder))
-                        continue;
-                    if (isFolderEmp(folder))
+                    prePos += rate;
+                    if (isFolderEmp(parentFolder))
                     {
-                        Directory.Delete(folder, true);
+                        Directory.Delete(parentFolder, true);
                         continue;
                     }
-                    string info = "正在转换：" + folder + ".pdf";
-                    handleSubFolder(folder);
-                    SetTextMessage(prePos + rate * i / directions.Length, info);
-                    prePos = prePos + rate;
+                    string info = "正在转换：" + parentFolder + ".pdf";
+                    handleSubFolder(parentFolder);
+                    SetTextMessage((int)prePos, info);
+                }
+                else
+                {
+                    rate = parRate / directions.Length;
+                    foreach (string folder in directions)
+                    {
+                        prePos += rate;
+                        if (isParentFolder(folder))
+                        {
+                            continue;
+                        }
+                        if (isFolderEmp(folder))
+                        {
+                            Directory.Delete(folder, true);
+                            continue;
+                        }
+                        string info = "正在转换：" + folder + ".pdf";
+                        handleSubFolder(folder);
+                        SetTextMessage((int)prePos, info);
+                    }
                 }
             }
             
