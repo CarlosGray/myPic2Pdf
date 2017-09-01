@@ -41,6 +41,8 @@ namespace myPic2Pdf
             {
                 listBox1.Items.Add(file);
             }
+            this.progressBar1.Value = 0;
+            this.label2.Text = "准备解析";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -51,7 +53,7 @@ namespace myPic2Pdf
                 return;
             }
             mSize = ((ComboBoxItem<string, PdfSharp.PageSize>)CB_size.SelectedItem).Value;
-            mIsAutoZoom = this.checkBox1.Checked;
+            mIsAutoAdapt = this.checkBox1.Checked;
             this.button1.Enabled = false;
             this.checkBox1.Enabled = false;
             this.CB_size.Enabled = false;
@@ -69,14 +71,15 @@ namespace myPic2Pdf
 
                 if (directions.Length == 0)
                 {
-                    prePos += rate;
+                    string info = "正在转换：" + parentFolder + ".pdf";
+                    SetTextMessage((int)prePos, info);
                     if (isFolderEmp(parentFolder))
                     {
                         Directory.Delete(parentFolder, true);
                         continue;
                     }
-                    string info = "正在转换：" + parentFolder + ".pdf";
                     handleSubFolder(parentFolder);
+                    prePos += rate;
                     SetTextMessage((int)prePos, info);
                 }
                 else
@@ -84,7 +87,8 @@ namespace myPic2Pdf
                     rate = parRate / directions.Length;
                     foreach (string folder in directions)
                     {
-                        prePos += rate;
+                        string info = "正在转换：" + folder + ".pdf";
+                        SetTextMessage((int)prePos, info);
                         if (isParentFolder(folder))
                         {
                             continue;
@@ -94,8 +98,8 @@ namespace myPic2Pdf
                             Directory.Delete(folder, true);
                             continue;
                         }
-                        string info = "正在转换：" + folder + ".pdf";
                         handleSubFolder(folder);
+                        prePos += rate;
                         SetTextMessage((int)prePos, info);
                     }
                 }
@@ -125,20 +129,6 @@ namespace myPic2Pdf
                     //this.listBox1.Items.Clear();
                 }
             }
-        }
-        private bool isFolderEmp(string folder)
-        {
-            string[] files = Directory.GetFiles(folder);
-            foreach (string file in files)
-            {
-                string exname = file.Substring(file.LastIndexOf(".") + 1);
-
-                if (exname.Equals("jpg") || exname.Equals("bmp") || exname.Equals("pdf"))
-                {
-                    return false;
-                }
-            }
-            return true;
         }
         private bool isParentFolder(string filename)
         {
@@ -184,7 +174,7 @@ namespace myPic2Pdf
                     PdfPage page = document.AddPage();
                     page.Size = mSize;
                     XGraphics gfx = XGraphics.FromPdfPage(page);
-                    PDFImage.DrawImage(gfx, path, mIsAutoZoom);
+                    PDFImage.DrawImage(gfx, path, mIsAutoAdapt);
                 }
             }
             document.Save(filename);
@@ -207,13 +197,28 @@ namespace myPic2Pdf
         {
             string exname = filename.Substring(filename.LastIndexOf(".") + 1);
 
-            if (exname.Equals("jpg") || exname.Equals("bmp"))
+            if (exname.Equals("jpg") || exname.Equals("bmp") || exname.Equals("png") || exname.Equals("jpeg"))
             {
                 return true;
             }
 
             return false;
         }
+        private bool isFolderEmp(string folder)
+        {
+            string[] files = Directory.GetFiles(folder);
+            foreach (string file in files)
+            {
+                string exname = file.Substring(file.LastIndexOf(".") + 1);
+
+                if (exname.Equals("jpg") || exname.Equals("bmp") || exname.Equals("png") || exname.Equals("jpeg") || exname.Equals("pdf"))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         /// <summary>  
         /// 获取指定目录及子目录中所有子目录列表  
         /// </summary>  
@@ -238,6 +243,6 @@ namespace myPic2Pdf
             }
         }  
         private PdfSharp.PageSize mSize;
-        private bool mIsAutoZoom;
+        private bool mIsAutoAdapt;
     }
 }

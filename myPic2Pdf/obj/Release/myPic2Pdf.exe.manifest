@@ -49,19 +49,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>0JlWWzslVmjJ4n7BqsACQ24YGVQ=</dsig:DigestValue>
+        <dsig:DigestValue>95PdcTe6TCSj08sbhiltvcrgXBI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PdfSharp.dll" size="581632">
-      <assemblyIdentity name="PdfSharp" version="1.32.2608.0" publicKeyToken="F94615AA0424F9EB" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PdfSharp.dll" size="581120">
+      <assemblyIdentity name="PdfSharp" version="1.50.4589.0" publicKeyToken="F94615AA0424F9EB" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>tu9nX9M3vwJ8YPtPCWFkvmZp2mw=</dsig:DigestValue>
+        <dsig:DigestValue>NckiAmlo9Ix5T16tVgkzSMlvvWg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

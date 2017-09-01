@@ -152,7 +152,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:PdfSharp, Version=1.50.4589.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_0781E0F2A27C758C9B9BA0BC6C9CB9C9"
@@ -267,7 +267,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pic2Pdf"
         "ProductCode" = "8:{F3CA747B-12C7-43B3-9A65-5F520F9DA0D5}"
-        "PackageCode" = "8:{1CDF2A65-8101-4264-A4ED-8BD1E7AE173A}"
+        "PackageCode" = "8:{F95BEC1B-9D62-4CE0-9FAA-A271748A486E}"
         "UpgradeCode" = "8:{847A85B3-5419-493B-AA02-632E2D493324}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

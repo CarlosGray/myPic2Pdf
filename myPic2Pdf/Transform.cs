@@ -141,12 +141,12 @@ namespace Transform
         {
         }
 
-        public void DrawImage(XGraphics gfx, string jpegSamplePath, bool isAutoZoom = false)
+        public void DrawImage(XGraphics gfx, string jpegSamplePath, bool isAutoAdapt = false)
         {
             XImage image = XImage.FromFile(jpegSamplePath);
             double x = (gfx.PageSize.Width - image.PixelWidth * 72 / image.HorizontalResolution) / 2;
             double y = (gfx.PageSize.Height - image.PixelHeight * 72 / image.VerticalResolution) / 2;
-            if (isAutoZoom)
+            if (isAutoAdapt || x < 0.0 || y < 0.0)
             {
                 double s1 = gfx.PageSize.Width / image.Size.Width;
                 double s2 = gfx.PageSize.Height / image.Size.Height;
